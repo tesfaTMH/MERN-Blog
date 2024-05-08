@@ -1,11 +1,24 @@
-import { useState } from "react";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
-    <>
-      <h2 className="text-3xl font-bold underline">Hello from frontend</h2>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
