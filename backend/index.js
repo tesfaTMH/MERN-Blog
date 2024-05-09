@@ -1,20 +1,24 @@
 import express from 'express'
-import mongoose from 'mongoose'
+import connectDB from '../backend/db/config.js'
 import dotenv from 'dotenv'
+
+import userRouter from './routes/userRoute.js'
+import authRoute from './routes/authRoute.js'
 
 dotenv.config()
 
-mongoose.connect(process.env.MONGODB_URI).then(()=>{
-    console.log(`Successfully connected to MONGODB: `)
-}).catch((err) =>{
-    console.log(err)
-})
-
+connectDB(process.env.MONGODB_URI)
 const app = express()
-const PORT = 3000
+const PORT = 3000;
+
+// builtin middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+app.use('/api/user', userRouter)
+app.use('/api/auth', authRoute)
 
 
-app.listen(() => {
-    console.log(`Server is running on port ${PORT}`)
+app.listen(PORT, () => {
+    console.log('Running')
 })
-
